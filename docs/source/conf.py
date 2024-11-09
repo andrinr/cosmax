@@ -18,13 +18,15 @@ release = '0.1'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
-    'sphinx.ext.napoleon'
+    'sphinx.ext.napoleon',
+    'sphinx.ext.autosummary'
 ]
+autosummary_generate = True
 
 import sys
-from pathlib import Path
+import os
 
-sys.path.insert(0, str(Path('..').resolve()))
+sys.path.insert(0, os.path.abspath('../..'))
 
 templates_path = ['_templates']
 exclude_patterns = []

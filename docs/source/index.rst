@@ -6,8 +6,12 @@
 COSMAX Documentation
 ====================
 
-.. automodule:: cosmax.main
-    :members:
+.. autosummary::
+   :toctree: _autosummary
+   :template: custom-module-template.rst
+   :recursive:
+
+   cosmax   
 
 Add your content using ``reStructuredText`` syntax. See the
 `reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_

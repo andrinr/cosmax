@@ -1,7 +1,6 @@
 import jax
 import jax.numpy as jnp
 from typing import Tuple
-from .growth_factor import compute_growth_factor
 
 def compute_overdensity_mean(rho : jax.Array) -> Tuple[jax.Array, float]:
     """
