@@ -122,4 +122,10 @@ def bicubic_interp(
             for k in range(2):
                 f_dxyz = jax.ops.index_update(f_dxyz, jax.ops.index[:, i, j, k], 
                                                    grad_xyz[(x + i) % n, (y + j) % n, (z + k) % n])
+                
+    # find the weights
+    xw = (pos[0] % 1.0 - coords[x]) / dx
+    yw = (pos[1] % 1.0 - coords[y]) / dx
+    zw = (pos[2] % 1.0 - coords[z]) / dx
+    
     

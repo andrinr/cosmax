@@ -1,7 +1,7 @@
 import jax.numpy as jnp
 import jax
 from typing import Tuple
-from .spectral_op import SpectralOperation
+from .spectral_ops.spectral_op import SpectralOperation
 
 class SpectralLoss(SpectralOperation):
     n_bins : int
