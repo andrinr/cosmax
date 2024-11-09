@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: '3.x'
 
@@ -26,6 +26,12 @@ jobs:
     - name: Build Docs
       run: |
         sphinx-build -b html docs/source  docs/_build
+
+    - name: Upload documentation artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: github-pages
+        path: docs/_build/html
 
   deploy:
     needs: build
@@ -44,6 +50,14 @@ jobs:
     # Specify runner + deployment step
 
     steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      - name: Download documentation artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
