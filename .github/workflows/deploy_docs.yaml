@@ -63,5 +63,4 @@ jobs:
         uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
 
