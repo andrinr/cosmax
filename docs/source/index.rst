@@ -1,24 +1,17 @@
-.. cosmax documentation master file, created by
-   sphinx-quickstart on Sat Nov  9 11:15:31 2024.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+cosmax
+======================
 
-COSMAX Documentation
-====================
+Fast and differentiable helper functions for analysis and inference on structured and unstructured data in cosmology.
 
-.. autosummary::
-   :toctree: _autosummary
-   :template: custom-module-template.rst
-   :recursive:
+.. toctree::
+   :maxdepth: 3
+   :caption: Contents:
 
    cosmax   
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+Indices and tables
+==================
 
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
