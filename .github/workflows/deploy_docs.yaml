@@ -27,30 +27,30 @@ name: Deploy Docs
         run: |
           sphinx-build -b html docs/source  docs/_build
 
-      - name: Deploy to docs branch
-        run: |
-          # Step into the build directory
-          cd docs/_build
+      # - name: Deploy to docs branch
+      #   run: |
+      #     # Step into the build directory
+      #     cd docs/_build
 
-          # Initialize the git repo and switch to or create the docs branch
-          git init
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git fetch origin
-          git checkout -b docs
+      #     # Initialize the git repo and switch to or create the docs branch
+      #     git init
+      #     git config user.name "GitHub Actions"
+      #     git config user.email "actions@github.com"
+      #     git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+      #     git fetch origin
+      #     git checkout -b docs
 
-          # Clear the branch and bring in new files
-          git rm -rf .
-          cp -r ../html/* .
+      #     # Clear the branch and bring in new files
+      #     git rm -rf .
+      #     cp -r ../html/* .
 
-          # Add, commit, and push changes
-          git add .
-          git commit -m "Update documentation"
-          git push origin docs --force
+      #     # Add, commit, and push changes
+      #     git add .
+      #     git commit -m "Update documentation"
+      #     git push origin docs --force
 
-      # - name: Deploy to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: ./docs/_build/html
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/_build/
