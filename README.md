@@ -3,7 +3,11 @@ Fast and differentiable implementations of operations needed for inference and a
 
 ## Development
 
+Build 
 
+```
+python -m build
+```
 
 ### Documentation
 
