@@ -3,6 +3,11 @@ import jax
 from .spectral_op import SpectralOperation
 
 class Potential(SpectralOperation):
+    """
+    Compute the gravitational potential from a 3D density field
+    
+    :parm n_grid: number of grid points in each dimension
+    """
 
     def __init__(self, n_grid : int):
         super().__init__(n_grid=n_grid)
@@ -11,6 +16,15 @@ class Potential(SpectralOperation):
             self, 
             field : jax.Array, 
             G : float = 6.6743 * 10**(-11)):
+        
+        """
+        Compute the potential from a 3D density field
+        
+        :param field: density field
+        :param G: gravitational constant
+
+        :return: The 3D gravitational potential field
+        """
         
         potential = jnp.fft.rfftn(
             field,  

@@ -4,6 +4,8 @@ import jax.numpy as jnp
 class SpectralOperation:
     """
     A base class for precomputing the frequencies for square 3D grids.
+
+    :parm n_grid: number of grid points in each dimension
     """
     k = jax.Array
     frequencies : jax.Array

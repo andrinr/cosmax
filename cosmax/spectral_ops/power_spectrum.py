@@ -4,6 +4,13 @@ from typing import Tuple
 from .spectral_op import SpectralOperation
 
 class PowerSpectrum(SpectralOperation):
+    """
+    Compute the power spectrum from a 3D density field
+
+    :parm n_grid: number of grid points in each dimension
+    :parm n_bins: number of bins for the power spectrum
+    """
+
     n_bins : int
     index_grid : jax.Array
     n_modes : jax.Array
@@ -18,6 +25,14 @@ class PowerSpectrum(SpectralOperation):
         self.n_modes = self.n_modes.at[self.index_grid].add(1)
 
     def __call__(self, delta : jax.Array) -> Tuple[jax.Array, jax.Array]:
+        """
+        Compute the power spectrum from a 3D density field
+        
+        :param delta: density field
+        
+        :return: The wavenumber
+        :return: The power for each wavenumber
+        """
         # get the density field in fourier space
         delta_k = jnp.fft.rfftn(delta)
 

@@ -25,10 +25,19 @@ def fit_field(
         learning_rate : float = 0.005,
         ) -> Tuple[jax.Array, jax.Array, jax.Array]:
     """
-    Fit a field using a set of particles.
-    Returns the lagrangian positions, the eulerian positions and the mass of the particles.
-    The field is assumed to be a 3D grid of shape (N, N, N).
-    The function returns the position and mass of the particles.
+    Given a 3D density field, fit the particle positions and masses such that
+    the density field is well represented by the particles.
+
+    :param key: jax random key
+    :param N: number of particles in each dimension
+    :param field: 3D density field
+    :param total_mass: total mass of the particles
+    :param iterations: number of iterations
+    :param learning_rate: learning rate
+
+    :return: The initial particle positions from a regular grid
+    :return: The particle positions after optimization
+    :return: The particle masses
     """
 
     num_particles = N**3

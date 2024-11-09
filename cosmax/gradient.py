@@ -8,6 +8,10 @@ def central_difference(
     """
     Compute the central difference of a field along a given axis.
     Periodic boundary conditions are used.
+
+    :param field: field to differentiate
+    :param axis: axis along which to differentiate
+    :param delta: grid spacing
     """
     
     field_r = jnp.roll(field, 1, axis=axis)
@@ -21,6 +25,11 @@ def gradient(
     """
     Compute the gradient of a field using central differences.
     Periodic boundary conditions are used.
+
+    :param field: field to differentiate
+    :param delta: grid spacing  
+
+    :return: The gradient of the field
     """
     
     grad_x = central_difference(field, 0, delta)

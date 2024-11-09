@@ -12,6 +12,12 @@ def nn_ma(
     Nearest Neighbour (NN) mass assignment.
     Position are assumed to be normalized between 0 and 1.
     Periodic boundary conditions are used.
+
+    :param pos: position of the particle
+    :param weight: weight of the particle
+    :param grid_size: size of the grid
+
+    :return: The grid with the mass assigned
     """
 
     coords = jnp.linspace(start=0, stop=1, num=grid_size+1)
@@ -38,6 +44,12 @@ def cic_ma(
     Periodic cloud in a cell mass (CIC) mass assignment. 
     Position are assumed to be normalized between 0 and 1.
     Periodic boundary conditions are used.
+
+    :param pos: position of the particle
+    :param weight: weight of the particle
+    :param grid_size: size of the grid
+
+    :return: The grid with the mass assigned
     """
     
     dx = 1 / grid_size

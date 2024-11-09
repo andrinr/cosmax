@@ -9,6 +9,11 @@ def bilinear_interp(
     """
     Returns values of a scalar field at a given position using bilinear interpolation.
     Periodic boundary conditions are used.
+
+    :param pos: position to interpolate
+    :param scalar_field: scalar field
+
+    :return: The interpolated value
     """
     
     n = scalar_field.shape[0]
@@ -43,6 +48,12 @@ def bicubic_interp(
     """
     Returns values of a scalar field at a given position using bicubic interpolation.
     Periodic boundary conditions are used.
+
+    :param pos: position to interpolate
+    :param scalar_field: scalar field
+
+    :return: The interpolated value
+
     """
     
     n = scalar_field.shape[0]
