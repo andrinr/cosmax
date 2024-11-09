@@ -20,3 +20,8 @@ classifiers = [
 [project.urls]
 Homepage = "https://andrinr.github.io/cosmax/"
 Issues = "https://github.com/andrinr/cosmax/issues"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]

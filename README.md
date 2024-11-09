@@ -3,7 +3,13 @@ Fast and differentiable implementations of operations needed for inference and a
 
 ## Development
 
-Build 
+### Test
+
+```
+pytest
+```
+
+### Build 
 
 ```
 python -m build
@@ -24,3 +30,8 @@ to view locally
 cd docs/_build
 python -m http.server
 ```
+
+### Release
+
+git tag v*.*.*
+git push origin v*.*.*

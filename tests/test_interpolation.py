@@ -1,6 +1,6 @@
 import jax.numpy as jnp
 import jax
-from field import bilinear_interp
+from cosmax import bilinear_interp
 
 def test_linear():
 

@@ -1,4 +1,4 @@
-from field import fit_field, cic_ma
+from cosmax import fit_field, cic_ma
 import jax
 import jax.numpy as jnp
 
@@ -12,7 +12,7 @@ def test_fit_field():
         N=N,
         field=field, 
         total_mass=jnp.sum(field),
-        iterations=1000,
+        iterations=100,
         learning_rate=0.001)
     
     field_pred = cic_ma(pos, mass, field.shape[0])
@@ -20,6 +20,3 @@ def test_fit_field():
     assert jnp.mean((field - field_pred) ** 2) < 0.0001
     assert pos.shape == (3, N**3)
     assert mass.shape == (N**3,)
-
-
-    assert False
