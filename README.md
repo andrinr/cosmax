@@ -3,6 +3,8 @@ Fast and differentiable implementations of operations needed for inference and a
 
 ## Development
 
+
+
 ### Documentation
 
 With the pip package sphinx installed, run
@@ -15,5 +17,6 @@ sphinx-build -b html docs/source docs/_build
 to view locally
 
 ```
+cd docs/_build
 python -m http.server
 ```
