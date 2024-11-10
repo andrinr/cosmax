@@ -4,7 +4,7 @@ from .spectral_op import SpectralOperation
 
 class Potential(SpectralOperation):
     """
-    Compute the gravitational potential from a 3D density field
+    Gravitational potential from a 3D density field.
     
     Args:
         n_grid : number of grid points in each dimension

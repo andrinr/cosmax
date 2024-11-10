@@ -6,6 +6,8 @@ def bilinear_interp(
         pos : jax.Array, 
         scalar_field : jax.Array) -> jax.Array:
     """
+    Bilinear interpolation of a scalar field.
+
     Returns values of a scalar field at a given position using bilinear interpolation.
     Periodic boundary conditions are used.
 

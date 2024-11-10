@@ -10,6 +10,7 @@ def cic_ma(
 
     """
     Periodic cloud in a cell mass (CIC) mass assignment. 
+    
     Position are assumed to be normalized between 0 and 1.
     Periodic boundary conditions are used.
 

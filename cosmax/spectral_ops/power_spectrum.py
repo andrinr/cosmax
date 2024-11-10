@@ -5,7 +5,7 @@ from .spectral_op import SpectralOperation
 
 class PowerSpectrum(SpectralOperation):
     """
-    Compute the power spectrum from a 3D density field
+    Power spectrum from a 3D density field.
 
     Args:
         n_grid : number of grid points in each dimension
@@ -38,8 +38,7 @@ class PowerSpectrum(SpectralOperation):
             delta : 3D density field
 
         Returns:
-            k : wavenumber
-            power : power spectrum
+            (k, power) : wavenumber and power spectrum
         """
         # get the density field in fourier space
         delta_k = jnp.fft.rfftn(delta)

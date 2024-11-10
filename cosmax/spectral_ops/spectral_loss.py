@@ -38,8 +38,7 @@ class SpectralLoss(SpectralOperation):
             true : 3D density field
 
         Returns:
-            k : wavenumber
-            loss : MSE in spectral space
+            (k, loss) : wavenumber and power spectrum
 
         """
         # get the density field in fourier space

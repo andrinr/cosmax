@@ -10,8 +10,7 @@ def compute_overdensity_mean(rho : jax.Array) -> Tuple[jax.Array, float]:
         rho : density field
 
     Returns:
-        overdensity : overdensity field
-        mean : mean density
+        (overdensity, mean) : overdensity field and mean density
 
     """
     mean = rho.mean()
