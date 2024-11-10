@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cosmax"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
   { name="Andrin Rehmann", email="andrinrehmann@gmail.com" },
 ]

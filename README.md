@@ -1,13 +1,16 @@
-# cosmax
-Fast and differentiable implementations of operations needed for inference and analysis in cosmology. Powered by JAX.
+# Cosmax
+Fast and differentiable tools for inference and analysis in cosmology. Powered by JAX. 
 
 ## Development
 
 To release as pip package, tests, docs and builds are handled automatically by github actions as defined in
 .github/workflows. To make a new release:
 
+```
 git tag v*.*.*
 git push origin v*.*.*
+```
+and change the version number in pyproject.toml.
 
 ### Test
 
