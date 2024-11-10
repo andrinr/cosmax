@@ -7,8 +7,14 @@ class SpectralLoss(SpectralOperation):
     """
     Compute the MSE in spectral space for each wavenumber
 
-    :parm n_grid: number of grid points in each dimension
-    :parm n_bins: number of bins for the power spectrum
+    Args:
+        n_grid : number of grid points in each dimension
+        n_bins : number of bins for the power spectrum
+
+    Attributes:
+        n_bins : number of bins for the power spectrum
+        index_grid : index of the bin for each wavenumber
+        n_modes : number of modes in each bin
     """
     n_bins : int
     index_grid : jax.Array
@@ -27,30 +33,33 @@ class SpectralLoss(SpectralOperation):
         """
         Compute the power spectrum from a 3D density field
 
-        :param pred: predicted density field
-        :param true: true density field
+        Args:
+            pred : 3D density field
+            true : 3D density field
 
-        :return: The wavenumber
-        :return: The loss for each wavenumber
+        Returns:
+            k : wavenumber
+            loss : MSE in spectral space
+
         """
         # get the density field in fourier space
         pred_k = jnp.fft.rfftn(pred)
         true_k = jnp.fft.rfftn(true)
 
-        complex_loss = jnp.zeros(self.n_bins)
+        loss = jnp.zeros(self.n_bins)
         power = jnp.zeros(self.n_bins)
-        complex_loss = complex_loss.at[self.index_grid].add((abs(pred_k)**2 - abs(true_k)**2)**2)
+        loss = loss.at[self.index_grid].add((abs(pred_k)**2 - abs(true_k)**2)**2)
         power = power.at[self.index_grid].add(abs(true_k)**2)
 
         # compute the average power
-        complex_loss = complex_loss / self.n_modes
-        complex_loss = complex_loss / power
+        loss = loss / self.n_modes
+        loss = loss / power
 
-        complex_loss = jnp.where(jnp.isnan(complex_loss), 0, complex_loss)
+        loss = jnp.where(jnp.isnan(loss), 0, loss)
 
         k = jnp.linspace(0, 0.5, self.n_bins)
 
-        return k, complex_loss
+        return k, loss
     
 
 

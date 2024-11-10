@@ -1,13 +1,24 @@
 import jax
 import jax.numpy as jnp
 import optax
-from .mass_assigment import cic_ma
+from cosmax import cic_ma
 from typing import Tuple, NamedTuple
 
 def loss(
         pos : jax.Array,
         mass : jax.Array,
         field_truth : jax.Array):
+    """
+    Loss function for fitting a 3D density field with particles
+
+    Args:
+        pos : particle positions
+        mass : particle masses
+        field_truth : 3D density field
+
+    Returns:
+        loss : mean squared error
+    """
     
     field_pred = cic_ma(
         pos,
@@ -28,16 +39,18 @@ def fit_field(
     Given a 3D density field, fit the particle positions and masses such that
     the density field is well represented by the particles.
 
-    :param key: jax random key
-    :param N: number of particles in each dimension
-    :param field: 3D density field
-    :param total_mass: total mass of the particles
-    :param iterations: number of iterations
-    :param learning_rate: learning rate
+    Args:
+        key : random key
+        N : number of particles in each dimension
+        field : 3D density field
+        total_mass : total mass of the field
+        iterations : number of iterations
+        learning_rate : learning rate
 
-    :return: The initial particle positions from a regular grid
-    :return: The particle positions after optimization
-    :return: The particle masses
+    Returns:
+        pos_lag : initial particle positions
+        pos : fitted particle positions
+        mass : fitted particle masses
     """
 
     num_particles = N**3

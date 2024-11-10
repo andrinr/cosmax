@@ -6,10 +6,8 @@ class Potential(SpectralOperation):
     """
     Compute the gravitational potential from a 3D density field
     
-    Parameters
-    ----------
-    n_grid
-        number of grid points in each dimension
+    Args:
+        n_grid : number of grid points in each dimension
 
     """
 
@@ -24,17 +22,12 @@ class Potential(SpectralOperation):
         """
         Compute the potential from a 3D density field
         
-        Parameters
-        ----------
-        field
-            3D density field
-        G
-            gravitational constant
+        Args:
+            field : 3D density field
+            G : gravitational
 
-        Returns
-        -------
-        potential
-            gravitational potential
+        Returns:
+            potential : gravitational potential
         """
         
         potential = jnp.fft.rfftn(

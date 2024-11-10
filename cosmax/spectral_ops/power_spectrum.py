@@ -7,8 +7,14 @@ class PowerSpectrum(SpectralOperation):
     """
     Compute the power spectrum from a 3D density field
 
-    :parm n_grid: number of grid points in each dimension
-    :parm n_bins: number of bins for the power spectrum
+    Args:
+        n_grid : number of grid points in each dimension
+        n_bins : number of bins for the power spectrum
+
+    Attributes:
+        n_bins : number of bins for the power spectrum
+        index_grid : index of the bin for each wavenumber
+        n_modes : number of modes in each bin
     """
 
     n_bins : int
@@ -28,10 +34,12 @@ class PowerSpectrum(SpectralOperation):
         """
         Compute the power spectrum from a 3D density field
         
-        :param delta: density field
-        
-        :return: The wavenumber
-        :return: The power for each wavenumber
+        Args:
+            delta : 3D density field
+
+        Returns:
+            k : wavenumber
+            power : power spectrum
         """
         # get the density field in fourier space
         delta_k = jnp.fft.rfftn(delta)

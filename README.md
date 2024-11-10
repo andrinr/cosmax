@@ -3,6 +3,12 @@ Fast and differentiable implementations of operations needed for inference and a
 
 ## Development
 
+To release as pip package, tests, docs and builds are handled automatically by github actions as defined in
+.github/workflows. To make a new release:
+
+git tag v*.*.*
+git push origin v*.*.*
+
 ### Test
 
 ```
@@ -15,7 +21,7 @@ pytest
 python -m build
 ```
 
-### Documentation
+### Local Docs
 
 With the pip package sphinx installed, run
 
@@ -30,8 +36,3 @@ to view locally
 cd docs/_build
 python -m http.server
 ```
-
-### Release
-
-git tag v*.*.*
-git push origin v*.*.*
