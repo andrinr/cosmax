@@ -16,6 +16,10 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dependencies = [
+  "jax >=0.2.13",
+  "optax >=0.0.9",
+]
 
 [project.urls]
 Homepage = "https://andrinr.github.io/cosmax/"

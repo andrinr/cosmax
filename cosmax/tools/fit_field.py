@@ -2,7 +2,7 @@ import jax
 import jax.numpy as jnp
 import optax
 from cosmax import cic_ma
-from typing import Tuple, NamedTuple
+from typing import Tuple
 
 def loss(
         pos : jax.Array,

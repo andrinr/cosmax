@@ -22,7 +22,8 @@ sys.path.insert(0, os.path.abspath('../..'))
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',  # For Google style docstrings
-    'sphinx_automodapi.automodapi'
+    'sphinx_automodapi.automodapi',
+    'sphinx_mdinclude',
 ]
 
 templates_path = ['_templates']

@@ -1,5 +1,4 @@
 import jax
-import jax.numpy as jnp
 from typing import Tuple
 
 def compute_overdensity_mean(rho : jax.Array) -> Tuple[jax.Array, float]:
