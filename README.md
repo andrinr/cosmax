@@ -1,5 +1,7 @@
 # Cosmax
-Fast and differentiable tools for inference and analysis in cosmology. Powered by JAX. 
+Fast and differentiable tools for analysis and inference on structured and unstructured data in cosmology.
+
+```pip install cosmax```
 
 ## Development
 
