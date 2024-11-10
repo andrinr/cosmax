@@ -1,6 +1,6 @@
 import jax
 import jax.numpy as jnp
-from jax import partial
+from functools import partial
 
 @partial(jax.jit, static_argnums=(2))
 def nn_ma(

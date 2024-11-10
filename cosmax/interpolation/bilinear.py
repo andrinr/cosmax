@@ -1,6 +1,5 @@
 import jax
 import jax.numpy as jnp
-from .gradient import central_difference
 
 @jax.jit
 def bilinear_interp(

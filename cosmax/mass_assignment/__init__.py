@@ -1,2 +1,2 @@
 from .cic import *
-from .nn import *
+from .nearest_neighbour import *

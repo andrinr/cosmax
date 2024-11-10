@@ -3,5 +3,5 @@ Tools
 
 Miscellaneous tools.
 
-.. automodapi:: cosmax.mass_assigment
+.. automodapi:: cosmax.tools
    :no-inheritance-diagram:

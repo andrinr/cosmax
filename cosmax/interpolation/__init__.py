@@ -1,1 +1,1 @@
-from bilinear import *
+from .bilinear import *
