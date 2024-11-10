@@ -38,7 +38,7 @@ class PowerSpectrum(SpectralOperation):
             delta : 3D density field
 
         Returns:
-            (k, power) : wavenumber and power spectrum
+            wavenumber and power spectrum
         """
         # get the density field in fourier space
         delta_k = jnp.fft.rfftn(delta)

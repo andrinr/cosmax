@@ -48,7 +48,7 @@ def fit_field(
         learning_rate : learning rate
 
     Returns:
-        (pos_lag, pos, mass) : initial particle positions, fitted particle positions, particle masses
+        initial particle positions, fitted particle positions, particle masses
     """
 
     num_particles = N**3
