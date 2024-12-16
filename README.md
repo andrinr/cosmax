@@ -14,6 +14,12 @@ The main contributions of this package are:
 
 ## Development
 
+To develop, clone the repository and install the package in editable mode:
+
+```
+pip install .
+```
+
 To release as pip package, tests, docs and builds are handled automatically by github actions as defined in
 .github/workflows. To make a new release:
 

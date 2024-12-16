@@ -1,6 +1,7 @@
 import jax.numpy as jnp
 import jax
 from cosmax import PowerSpectrum
+from powerbox import get_power
 
 def gen_data(N):
     key = jax.random.PRNGKey(20)
@@ -10,15 +11,34 @@ def gen_data(N):
     return rho
 
 def test_power():
-    N = 128
-    n_bins = 32
+
+    file = '../data/z49.bin'
+
+    # open file
+    with open(file, 'rb') as f:
+        # read data
+        data = f.read()
+        # convert to numpy array
+        delta = jnp.frombuffer(data, dtype=jnp.float32)
+        delta = delta.reshape(256, 256, 256)
+
+    N = 256
+    n_bins = 48
     power_spectrum = PowerSpectrum(n_grid=N, n_bins=n_bins)
 
-    delta = gen_data(N)
+    # delta = gen_data(N)
     
-    k, P_k = power_spectrum(delta)
+    k, P = power_spectrum(delta)
+
+    P_true, k_true = get_power(delta, boxlength=1.0)
+
+    print(P)
+    print(P_true)
 
     assert k.shape == (n_bins,)
-    assert P_k.shape == (n_bins,)
+    assert P.shape == (n_bins,)
 
-    assert jnp.all(P_k >= 0)
+    assert jnp.allclose(k, k_true)
+    assert jnp.allclose(P_true, P)
+
+    assert jnp.all(P >= 0)
