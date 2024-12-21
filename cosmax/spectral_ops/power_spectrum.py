@@ -23,12 +23,14 @@ class PowerSpectrum(SpectralOperation):
     index_grid : jax.Array
     n_modes : jax.Array
 
-    def __init__(self, n_grid : int, n_bins : int, boxlength : float):
-        super().__init__(n_grid=n_grid)
+    def __init__(self, n_grid : int, grid_size : float, n_bins : int):
+        super().__init__(n_grid=n_grid, grid_size=grid_size)
         self.n_bins = n_bins
-        self.boxlength = boxlength
 
-        self.index_grid = jnp.digitize(self.k, jnp.linspace(0, self.nyquist, self.n_bins), right=True) - 1
+        self.index_grid = jnp.digitize(
+            self.k, 
+            jnp.linspace(0, self.k.max(), self.n_bins),
+            right=False) - 1
 
         self.n_modes = jnp.zeros(self.n_bins)
         self.n_modes = self.n_modes.at[self.index_grid].add(1)
@@ -50,12 +52,13 @@ class PowerSpectrum(SpectralOperation):
         power = power.at[self.index_grid].add(delta_k * jnp.conj(delta_k))  
 
         # compute the average power
+        V = float(self.grid_size ** 3)
         power = power / self.n_modes
-        power = power / (self.boxlength ** 3 ** 2)
+        power = power / V ** 2
 
         power = jnp.where(jnp.isnan(power), 0, power)
 
-        k = jnp.linspace(0, 0.5, self.n_bins)
+        k = jnp.linspace(0, self.k.max(), self.n_bins)
 
         return k, power
 

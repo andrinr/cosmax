@@ -17,12 +17,16 @@ class SpectralOperation:
     k = jax.Array
     frequencies : jax.Array
     n_grid : int
+    grid_size : float
     nyquist : int
 
-    def __init__(self, n_grid : int):
+    def __init__(self, n_grid : int, grid_size : float = 1):
         self.n_grid = n_grid
-        self.nyquist = n_grid // 2 + 1
-        self.frequencies = jnp.fft.fftfreq(n_grid) * n_grid
+        self.grid_size = grid_size
+        self.frequencies = jnp.fft.fftfreq(n_grid, d=1/self.grid_size)
+        self.real_frequencies = jnp.fft.rfftfreq(n_grid, d=1/self.grid_size)
 
-        kx, ky, kz = jnp.meshgrid(self.frequencies, self.frequencies, self.frequencies[0:self.nyquist])
+        self.nyquist_index = jnp.ceil(n_grid / 2).astype(int)
+
+        kx, ky, kz = jnp.meshgrid(self.frequencies, self.frequencies, self.real_frequencies)
         self.k = jnp.sqrt(kx**2 + ky**2 + kz**2)
