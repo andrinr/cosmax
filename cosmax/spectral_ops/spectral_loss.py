@@ -50,6 +50,7 @@ class SpectralLoss(SpectralOperation):
 
         """
 
+
         # volume of the box
         V = float(self.grid_size ** 3)
         # volume of each grid cell
@@ -62,12 +63,16 @@ class SpectralLoss(SpectralOperation):
         delta_k_b = jnp.fft.rfftn(delta_b, norm="backward")
         delta_k_b = Vx * delta_k_b
 
-        power = jnp.real(delta_k_a * jnp.conj(delta_k_b) / V)
+        power_a = delta_k_a
+        power_b = delta_k_b
 
-        power_ensemble = jnp.zeros(self.n_bins)
-        power_ensemble = power_ensemble.at[self.index_grid].add(power)
+        power_loss = jnp.real((power_a - power_b) * jnp.conj(power_a - power_b) / V)
 
-        power_ensemble_avg = power_ensemble / self.n_modes
-        power_ensemble_avg = jnp.where(jnp.isnan(power_ensemble_avg), 0, power_ensemble_avg)
+        power_loss_ensemble = jnp.zeros(self.n_bins)
+        power_loss_ensemble = power_loss_ensemble.at[self.index_grid].add(power_loss)
+
+        power_loss_ensemble_avg = power_loss_ensemble / self.n_modes
+        power_loss_ensemble_avg = jnp.where(
+            jnp.isnan(power_loss_ensemble_avg), 0, power_loss_ensemble_avg)
     
-        return self.k, power_ensemble_avg
+        return self.k, power_loss_ensemble_avg

@@ -40,7 +40,7 @@ class PowerSpectrum(SpectralOperation):
         self.n_modes = jnp.zeros(self.n_bins)
         self.n_modes = self.n_modes.at[self.index_grid].add(1)
 
-    def __call__(self, delta : jax.Array, delta_2 : jax.Array = None) -> Tuple[jax.Array, jax.Array]:
+    def __call__(self, delta : jax.Array) -> Tuple[jax.Array, jax.Array]:
         """
         Compute the power spectrum from a 3D density field
         
@@ -60,13 +60,7 @@ class PowerSpectrum(SpectralOperation):
         delta_k = jnp.fft.rfftn(delta, norm="backward")  
         delta_k = Vx * delta_k
 
-        if delta_2 is not None:
-            delta_k_2 = jnp.fft.rfftn(delta_2, norm="backward")
-            delta_k_2 = Vx * delta_k_2
-        else:
-            delta_k_2 = delta_k
-
-        power = jnp.real(delta_k * jnp.conj(delta_k_2) / V)
+        power = jnp.real(delta_k * jnp.conj(delta_k) / V)
 
         power_ensemble = jnp.zeros(self.n_bins)
         power_ensemble = power_ensemble.at[self.index_grid].add(power)
