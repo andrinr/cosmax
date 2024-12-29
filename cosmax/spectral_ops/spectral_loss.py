@@ -24,7 +24,7 @@ class SpectralLoss(SpectralOperation):
         super().__init__(n_grid=n_grid)
         self.n_bins = n_bins
 
-        self.index_grid = jnp.digitize(self.k, jnp.linspace(0, self.nyquist, self.n_bins), right=True) - 1
+        self.index_grid = jnp.digitize(self.k_mag, jnp.linspace(0, self.nyquist, self.n_bins), right=True) - 1
 
         self.n_modes = jnp.zeros(self.n_bins)
         self.n_modes = self.n_modes.at[self.index_grid].add(1)

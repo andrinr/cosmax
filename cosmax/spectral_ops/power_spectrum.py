@@ -27,9 +27,11 @@ class PowerSpectrum(SpectralOperation):
         super().__init__(n_grid=n_grid, grid_size=grid_size)
         self.n_bins = n_bins
 
+        self.bin_edges = jnp.linspace(0, self.k_mag.max(), self.n_bins + 2, endpoint=True)[1:]
+
         self.index_grid = jnp.digitize(
-            self.k, 
-            jnp.linspace(0, self.k.max(), self.n_bins),
+            self.k_mag, 
+            self.bin_edges,
             right=False) - 1
 
         self.n_modes = jnp.zeros(self.n_bins)
@@ -45,20 +47,26 @@ class PowerSpectrum(SpectralOperation):
         Returns:
             wavenumber and power spectrum
         """
-        # get the density field in fourier space
-        delta_k = jnp.fft.rfftn(delta)
 
-        power = jnp.zeros(self.n_bins)
-        power = power.at[self.index_grid].add(delta_k * jnp.conj(delta_k))  
-
-        # compute the average power
         V = float(self.grid_size ** 3)
-        power = power / self.n_modes
-        power = power / V ** 2
+        Vx = V / self.n_grid ** 3
 
-        power = jnp.where(jnp.isnan(power), 0, power)
+        # get the density field in fourier space
+        delta_k = jnp.fft.rfftn(delta, norm="backward")  
+        delta_k = Vx * delta_k
 
-        k = jnp.linspace(0, self.k.max(), self.n_bins)
+        power = jnp.real(delta_k * jnp.conj(delta_k) / V)
 
-        return k, power
+        power_ensemble_avg = jnp.zeros(self.n_bins)
+        power_ensemble_avg = power_ensemble_avg.at[self.index_grid].add(power)
+        
+        # power = power / V
+        power_ensemble_avg = power_ensemble_avg / self.n_modes
+
+        power_ensemble_avg = jnp.where(jnp.isnan(power_ensemble_avg), 0, power_ensemble_avg)
+
+    
+        k = ((jnp.roll(self.bin_edges, -1) + self.bin_edges) / 2)[:-1]
+
+        return k, power_ensemble_avg
 

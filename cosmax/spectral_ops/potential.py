@@ -35,7 +35,7 @@ class Potential(SpectralOperation):
             s=(self.n_grid, self.n_grid, self.n_grid), 
             axes=(1, 2, 3))
         
-        potential = -4 * jnp.pi * potential  * self.k *G
+        potential = -4 * jnp.pi * potential  * self.k_mag *G
 
         potential = jnp.fft.irfftn(
             field,  
