@@ -1,8 +1,11 @@
-# cosmax
+# Cosmax
 
-Fast and differentiable tools for analysis and inference on structured and unstructured data in cosmology.
+Fast and differentiable tools for analysis and inference on structured and unstructured data in cosmology. Install with
+```pip install cosmax```.
 
-```pip install cosmax```
+Matter power spectrum for redshift 0 generated using cosmax:
+
+![PowerSpectrum](data/power.png)
 
 The main contributions of this package are:
 
@@ -56,3 +59,7 @@ to view locally
 cd docs/_build
 python -m http.server
 ```
+
+## Acknowledgements
+
+[PowerBox](https://powerbox.readthedocs.io/en/latest/) was used as a reference implementation the matter power spectrum.
