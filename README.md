@@ -7,11 +7,11 @@ Fast and differentiable tools for analysis and inference on structured and unstr
 
 Generate the [Matter Power Spectrum](examples/simple_power_spectrum.ipynb) from a 3D densitiy field:
 
-![PowerSpectrum](data/power.png)
+<img src="data/power.png" alt="drawing" width="400"/>
 
 Generate the [ICs for a given matter power spectrum](examples/generate_ic.ipynb):
 
-![ICs](data/ics.png)
+<img src="data/ic.png" alt="drawing" width="400"/>
 
 ## Development
 
