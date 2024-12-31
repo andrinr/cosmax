@@ -55,8 +55,14 @@ class Generator(SpectralOperation):
         # generate random key
         key = jax.random.PRNGKey(seed)
 
+        # volume of the box
+        V = float(self.grid_size ** 3)
+        # volume of each grid cell
+        Vx = V / self.n_grid ** 3
+
         # Generate the random field
-        delta = jax.random.uniform(key, shape=(self.n_grid, self.n_grid, self.n_grid))
+        delta = jax.random.normal(key, shape=(self.n_grid, self.n_grid, self.n_grid))
+        delta = delta / jnp.sqrt(Vx)
         delta_k = jnp.fft.rfftn(delta)
 
         # Multiply the random field by the correlation kernel
