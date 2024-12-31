@@ -14,11 +14,9 @@ class Generator(SpectralOperation):
     Attributes:
         n_bins : number of bins for the power spectrum
         index_grid : index of the bin for each wavenumber
-        n_modes : number of modes in each bin
     """
     n_bins : int
     index_grid : jax.Array
-    n_modes : jax.Array
 
     def __init__(self, n_grid : int, grid_size : float):
         super().__init__(n_grid=n_grid, grid_size=grid_size)
@@ -35,14 +33,14 @@ class Generator(SpectralOperation):
 
     def __call__(self, seed : jax.Array, Pk : jax.Array) -> jax.Array:
         """
-        Compute the power spectrum from a 3D density field
+        Generate a 3D density for a given power spectrum.
 
         Args:
-            pred : 3D density field
-            true : 3D density field
+            seed : random seed
+            Pk : power spectrum
 
         Returns:
-            wavenumber and power spectrum
+            3D density field
 
         """
 
