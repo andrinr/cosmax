@@ -5,13 +5,21 @@ Fast and differentiable tools for analysis and inference on structured and unstr
 
 ## What can I do with this package?
 
-Generate the [Matter Power Spectrum](examples/simple_power_spectrum.ipynb) from a 3D densitiy field:
+### Classical Use Cases
+
+Generate the [Matter Power Spectrum](examples/power_spectrum.ipynb) from a 3D densitiy field:
 
 <img src="data/power.png" alt="drawing" width="400"/>
 
 Generate the [ICs for a given matter power spectrum](examples/generate_ic.ipynb):
 
 <img src="data/ic.png" alt="drawing" width="400"/>
+
+Cloud in a cell mass assignment scheme for [density field to grid](examples/cic.ipynb):
+
+<img src="data/cic.png" alt="drawing" width="400"/>
+
+### Exploiting the differentiability
 
 ## Development
 
