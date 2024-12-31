@@ -3,17 +3,15 @@
 Fast and differentiable tools for analysis and inference on structured and unstructured data in cosmology. Install with
 ```pip install cosmax```.
 
-Matter power spectrum for redshift 0 generated using cosmax:
+## What can I do with this package?
+
+Generate the [Matter Power Spectrum](examples/simple_power_spectrum.ipynb) from a 3D densitiy field:
 
 ![PowerSpectrum](data/power.png)
 
-The main contributions of this package are:
+Generate the [ICs for a given matter power spectrum](examples/generate_ic.ipynb):
 
-* Fast and fully differentiable Power Spectrum Computation. This can be used for optiziation with loss functions that depend on the power spectrum.
-* Mapping unstructured particle distribution to 3D grids with differentiable mass assignment.
-* Mapping from 3D grids to unstructured particle distributions with gradient-based optimization over mass assignment.
-
-## What can I do with this package?
+![ICs](data/ics.png)
 
 ## Development
 

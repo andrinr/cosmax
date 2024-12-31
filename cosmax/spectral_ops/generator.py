@@ -1,6 +1,5 @@
 import jax.numpy as jnp
 import jax
-from typing import Tuple
 from .spectral_op import SpectralOperation
 
 class Generator(SpectralOperation):
