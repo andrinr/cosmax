@@ -23,7 +23,7 @@ class Generator(SpectralOperation):
     def __init__(self, n_grid : int, grid_size : float):
         super().__init__(n_grid=n_grid, grid_size=grid_size)
 
-        self.bin_edges = jnp.linspace(0, self.k_mag.max(), self.grid_size + 1, endpoint=True)[1:]
+        self.bin_edges = jnp.linspace(0, self.k_mag.max(), self.n_grid + 1, endpoint=True)[1:]
 
         bins_pad = jnp.pad(self.bin_edges, (1, 0), mode='constant', constant_values=0)
         self.k = (bins_pad[1:] + bins_pad[:-1]) / 2
@@ -52,14 +52,17 @@ class Generator(SpectralOperation):
         Ax = jnp.sqrt(Pk)
         Ax = Ax.at[self.index_grid].get()
 
+        # generate random key
+        key = jax.random.PRNGKey(seed)
+
         # Generate the random field
-        delta_k = jax.random.normal(seed, shape=(self.n_grid, self.n_grid, self.n_grid))
-        delta_k = jnp.fft.rfftn(delta_k)
+        delta = jax.random.uniform(key, shape=(self.n_grid, self.n_grid, self.n_grid))
+        delta_k = jnp.fft.rfftn(delta)
 
         # Multiply the random field by the correlation kernel
         delta_k = delta_k * Ax
 
         # Transform back to real space
-        delta = jnp.fft.rfftn(delta_k)
+        delta = jnp.fft.irfftn(delta_k)
 
         return delta
