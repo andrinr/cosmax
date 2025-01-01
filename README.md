@@ -10,25 +10,25 @@ Install with `pip install cosmax`.
 
 Generate the [Matter Power Spectrum](examples/power_spectrum.ipynb) from a 3D densitiy field:
 
-<img src="data/power.png" alt="drawing" width="400"/>
+<img src="https://raw.githubusercontent.com/andrinr/cosmax/refs/heads/main/data/power.png" alt="drawing" width="400"/>
 
 Generate the [ICs for a given matter power spectrum](examples/generate_ic.ipynb):
 
-<img src="data/ic.png" alt="drawing" width="400"/>
+<img src="https://raw.githubusercontent.com/andrinr/cosmax/refs/heads/main/data/ic.png" alt="drawing" width="400"/>
 
 Cloud in a cell mass assignment scheme to [convert unstructured particles to a 3D density field](examples/cic.ipynb):
 
-<img src="data/cic.png" alt="drawing" width="400"/>
+<img src="https://raw.githubusercontent.com/andrinr/cosmax/refs/heads/main/data/cic.png" alt="drawing" width="400"/>
 
 ### Optimization
 
 With gradient optimization over the cic mass assignment scheme, we can find the particle positions that best [fit an observed density field](examples/fit.ipynb):
 
-<img src="data/fit.png" alt="drawing" width="400"/>
+<img src="https://raw.githubusercontent.com/andrinr/cosmax/refs/heads/main/data/fit.png" alt="drawing" width="400"/>
 
 We can also use the power spectrum as a loss function to find a [conditional IC density field ](examples/conditional_ic.ipynb):
 
-<img src="data/cond_ic.png" alt="drawing" width="400"/>
+<img src="https://raw.githubusercontent.com/andrinr/cosmax/refs/heads/main/data/cond_ic.png" alt="drawing" width="400"/>
 
 ## What are the limitations?
 
