@@ -44,7 +44,7 @@ def fit_field(
 
     Args:
         key : random key
-        elements : number of grid points in each dimension
+        elements : cubic root of the number of particles
         field : 3D density field
         total_mass : total mass of the field
         size : size of the box in real space
@@ -85,6 +85,9 @@ def fit_field(
     for i in range(iterations):
         pos, opt_state = step(pos, opt_state)
         if i % (iterations//10) == 0:
-            print(f"Loss: {loss(pos, mass, field)}")
+            print(f"Loss: {loss(pos, mass, field)}, Iteration: {i}")
+
+    # apply periodic boundary conditions
+    pos = pos % size
 
     return pos_lag, pos, mass

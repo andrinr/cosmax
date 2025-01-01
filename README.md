@@ -22,7 +22,9 @@ Cloud in a cell mass assignment scheme to [convert unstructured particles to a 3
 
 ### Exploiting the differentiability
 
-With gradient optimization over the cic mass assignment scheme, we can find the particle masses that best [fit an observed density field]. Note this does not work with the nearest neighbour mass assignment scheme, as its gradients are not smooth.
+With gradient optimization over the cic mass assignment scheme, we can find the particle positions that best [fit an observed density field](examples/fit.ipynb):
+
+<img src="data/fit.png" alt="drawing" width="400"/>
 
 ## What are the limitations?
 
