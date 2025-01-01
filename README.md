@@ -1,6 +1,13 @@
-# Cosmax
+# cosmax
 
-Fast and differentiable tools for analysis and inference on structured and unstructured data in cosmology. Powered by JAX. 
+by [Andrin Rehmann](https://github.com/andrinr)
+
+[![Downloads](https://pepy.tech/badge/cosmax)](https://pepy.tech/project/cosmax)
+[![Monthly Downloads](https://pepy.tech/badge/cosmax/month)](https://pepy.tech/project/cosmax)
+[![PyPI](https://img.shields.io/pypi/v/cosmax.svg)](https://pypi.python.org/pypi/cosmax)
+[![License: MIT](https://img.shields.io/badge/License-MIT-g.svg)](https://opensource.org/licenses/MIT)
+
+Fast and differentiable tools for analysis and optimization on structured and unstructured data in cosmology. Powered by JAX. 
 
 Install with `pip install cosmax`.
 
