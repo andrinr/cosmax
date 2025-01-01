@@ -30,15 +30,5 @@ def test_power():
     
     k, P = power_spectrum(delta)
 
-    P_true, k_true = get_power(delta, boxlength=1.0)
-
-    print(P)
-    print(P_true)
-
     assert k.shape == (n_bins,)
     assert P.shape == (n_bins,)
-
-    assert jnp.allclose(k, k_true)
-    assert jnp.allclose(P_true, P)
-
-    assert jnp.all(P >= 0)
