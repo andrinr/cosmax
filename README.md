@@ -84,7 +84,3 @@ python -m http.server
 ## Acknowledgements
 
 - [PowerBox](https://powerbox.readthedocs.io/en/latest/) was used as a reference implementation the matter power spectrum.
-
-- [Felix Köhler](https://github.com/Ceyron/machine-learning-and-simulation/)s implementation of Fourier Neural Operator was used as a guide to adapt the fno to jax and equinox.
-
-- The original [NeuralOperator](https://github.com/neuraloperator/neuraloperator) served as a reference for the fno implementation.
