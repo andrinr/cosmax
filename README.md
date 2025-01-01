@@ -26,7 +26,7 @@ With gradient optimization over the cic mass assignment scheme, we can find the 
 
 <img src="data/fit.png" alt="drawing" width="400"/>
 
-We can also use the power spectrum as a loss function to find a [conditional IC density field ](examples/conditional_ic.ipynb).
+We can also use the power spectrum as a loss function to find a [conditional IC density field ](examples/conditional_ic.ipynb):
 
 <img src="data/cond_ic.png" alt="drawing" width="400"/>
 
