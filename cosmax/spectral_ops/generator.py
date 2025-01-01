@@ -32,12 +32,12 @@ class Generator(SpectralOperation):
             self.bin_edges,
             right=False)
 
-    def __call__(self, seed : jax.Array, Pk : jax.Array) -> jax.Array:
+    def __call__(self, field : jax.Array, Pk : jax.Array) -> jax.Array:
         """
         Generate a 3D density for a given power spectrum.
 
         Args:
-            seed : random seed
+            field : 3D density field to be perturbed
             Pk : power spectrum
 
         Returns:
@@ -51,19 +51,15 @@ class Generator(SpectralOperation):
         Ax = jnp.sqrt(Pk)
         Ax = Ax.at[self.index_grid].get()
 
-        # generate random key
-        key = jax.random.PRNGKey(seed)
-
         # volume of the box
         V = float(self.size ** 3)
         # volume of each grid cell
         Vx = V / self.elements ** 3
 
-        # Generate the random field
-        delta = jax.random.normal(key, shape=(self.elements, self.elements, self.elements))
         # Account for the normalization of the random field
-        delta = delta / jnp.sqrt(Vx)
-        delta_k = jnp.fft.rfftn(delta)
+        field = field / jnp.sqrt(Vx)
+
+        delta_k = jnp.fft.rfftn(field)
 
         # Multiply the random field by the correlation kernel
         delta_k = delta_k * Ax

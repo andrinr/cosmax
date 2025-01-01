@@ -20,11 +20,15 @@ Cloud in a cell mass assignment scheme to [convert unstructured particles to a 3
 
 <img src="data/cic.png" alt="drawing" width="400"/>
 
-### Exploiting the differentiability
+### Optimization
 
 With gradient optimization over the cic mass assignment scheme, we can find the particle positions that best [fit an observed density field](examples/fit.ipynb):
 
 <img src="data/fit.png" alt="drawing" width="400"/>
+
+We can also use the power spectrum as a loss function to find a [conditional IC density field ](examples/conditional_ic.ipynb).
+
+<img src="data/cond_ic.png" alt="drawing" width="400"/>
 
 ## What are the limitations?
 
@@ -79,4 +83,8 @@ python -m http.server
 
 ## Acknowledgements
 
-[PowerBox](https://powerbox.readthedocs.io/en/latest/) was used as a reference implementation the matter power spectrum.
+- [PowerBox](https://powerbox.readthedocs.io/en/latest/) was used as a reference implementation the matter power spectrum.
+
+- [Felix Köhler](https://github.com/Ceyron/machine-learning-and-simulation/)s implementation of Fourier Neural Operator was used as a guide to adapt the fno to jax and equinox.
+
+- The original [NeuralOperator](https://github.com/neuraloperator/neuraloperator) served as a reference for the fno implementation.
