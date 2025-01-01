@@ -7,20 +7,22 @@ class Generator(SpectralOperation):
     Generates initial conditions given a power spectrum
 
     Args:
-        n_grid : number of grid points in each dimension
-        n_bins : number of bins for the power spectrum
+        elements : number of grid points in each dimension
+        size : size of the box in real space
 
     Attributes:
-        n_bins : number of bins for the power spectrum
+        elements : number of grid points in each dimension
+        size : size of the box in real space
+        k : wavenumber of each bin
         index_grid : index of the bin for each wavenumber
     """
     n_bins : int
     index_grid : jax.Array
 
-    def __init__(self, n_grid : int, grid_size : float):
-        super().__init__(n_grid=n_grid, grid_size=grid_size)
+    def __init__(self, elements : int, size : float = 1.0):
+        super().__init__(elements=elements, size=size)
 
-        self.bin_edges = jnp.linspace(0, self.k_mag.max(), self.n_grid + 1, endpoint=True)[1:]
+        self.bin_edges = jnp.linspace(0, self.k_mag.max(), self.elements + 1, endpoint=True)[1:]
 
         bins_pad = jnp.pad(self.bin_edges, (1, 0), mode='constant', constant_values=0)
         self.k = (bins_pad[1:] + bins_pad[:-1]) / 2
@@ -43,7 +45,7 @@ class Generator(SpectralOperation):
 
         """
 
-        assert Pk.shape == (self.n_grid,)
+        assert Pk.shape == (self.elements,)
 
         # Generate the correlation kernel
         Ax = jnp.sqrt(Pk)
@@ -53,12 +55,13 @@ class Generator(SpectralOperation):
         key = jax.random.PRNGKey(seed)
 
         # volume of the box
-        V = float(self.grid_size ** 3)
+        V = float(self.size ** 3)
         # volume of each grid cell
-        Vx = V / self.n_grid ** 3
+        Vx = V / self.elements ** 3
 
         # Generate the random field
-        delta = jax.random.normal(key, shape=(self.n_grid, self.n_grid, self.n_grid))
+        delta = jax.random.normal(key, shape=(self.elements, self.elements, self.elements))
+        # Account for the normalization of the random field
         delta = delta / jnp.sqrt(Vx)
         delta_k = jnp.fft.rfftn(delta)
 

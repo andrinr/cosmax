@@ -1,7 +1,8 @@
 # Cosmax
 
-Fast and differentiable tools for analysis and inference on structured and unstructured data in cosmology. Install with
-```pip install cosmax```.
+Fast and differentiable tools for analysis and inference on structured and unstructured data in cosmology. Powered by JAX. 
+
+Install with `pip install cosmax`.
 
 ## What can I do with this package?
 
@@ -15,11 +16,19 @@ Generate the [ICs for a given matter power spectrum](examples/generate_ic.ipynb)
 
 <img src="data/ic.png" alt="drawing" width="400"/>
 
-Cloud in a cell mass assignment scheme for [density field to grid](examples/cic.ipynb):
+Cloud in a cell mass assignment scheme to [convert unstructured particles to a 3D density field](examples/cic.ipynb):
 
 <img src="data/cic.png" alt="drawing" width="400"/>
 
 ### Exploiting the differentiability
+
+With gradient optimization over the cic mass assignment scheme, we can find the particle masses that best [fit an observed density field]. Note this does not work with the nearest neighbour mass assignment scheme, as its gradients are not smooth.
+
+## What are the limitations?
+
+- The package is currently in development and the API is not stable.
+- The package generally ONLY works with 3D square boxes and periodic boundary conditions.
+- I am not a physicist, so the package may contain errors and inaccuracies.
 
 ## Development
 

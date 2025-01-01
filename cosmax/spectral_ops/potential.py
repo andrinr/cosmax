@@ -12,7 +12,7 @@ class Potential(SpectralOperation):
     """
 
     def __init__(self, n_grid : int):
-        super().__init__(n_grid=n_grid)
+        super().__init__(elements=n_grid)
 
     def __call__(
             self, 
@@ -32,14 +32,14 @@ class Potential(SpectralOperation):
         
         potential = jnp.fft.rfftn(
             field,  
-            s=(self.n_grid, self.n_grid, self.n_grid), 
+            s=(self.elements, self.elements, self.elements), 
             axes=(1, 2, 3))
         
         potential = -4 * jnp.pi * potential  * self.k_mag *G
 
         potential = jnp.fft.irfftn(
             field,  
-            s=(self.n_grid, self.n_grid, self.n_grid), 
+            s=(self.elements, self.elements, self.elements), 
             axes=(1, 2, 3))
         
         return potential

@@ -8,26 +8,29 @@ class PowerSpectrum(SpectralOperation):
     Power spectrum from a 3D density field.
 
     Args:
-        n_grid : number of grid points in each dimension
-        n_bins : number of bins for the power spectrum
-        boxlength : length of the box in real space
+        elements : number of grid points in each dimension
+        bins : number of bins for the power spectrum
+        size : size of the box in real space
 
     Attributes:
-        n_bins : number of bins for the power spectrum
+        elements : number of grid points in each dimension
+        size : size of the box in real space
+        bins : number of bins for the power spectrum
+        k : wavenumber of each bin
         index_grid : index of the bin for each wavenumber
         n_modes : number of modes in each bin
-        boxlength : length of the box in real space
+        
     """
 
-    n_bins : int
+    bins : int
     index_grid : jax.Array
     n_modes : jax.Array
 
-    def __init__(self, n_grid : int, grid_size : float, n_bins : int):
-        super().__init__(n_grid=n_grid, grid_size=grid_size)
-        self.n_bins = n_bins
+    def __init__(self, elements : int, bins : int, size : float = 1.0):
+        super().__init__(elements=elements, size=size)
+        self.bins = bins
 
-        self.bin_edges = jnp.linspace(0, self.k_mag.max(), self.n_bins + 1, endpoint=True)[1:]
+        self.bin_edges = jnp.linspace(0, self.k_mag.max(), self.bins + 1, endpoint=True)[1:]
 
         bins_pad = jnp.pad(self.bin_edges, (1, 0), mode='constant', constant_values=0)
         self.k = (bins_pad[1:] + bins_pad[:-1]) / 2
@@ -37,7 +40,7 @@ class PowerSpectrum(SpectralOperation):
             self.bin_edges,
             right=False)
 
-        self.n_modes = jnp.zeros(self.n_bins)
+        self.n_modes = jnp.zeros(self.bins)
         self.n_modes = self.n_modes.at[self.index_grid].add(1)
 
     def __call__(self, delta : jax.Array) -> Tuple[jax.Array, jax.Array]:
@@ -52,9 +55,9 @@ class PowerSpectrum(SpectralOperation):
         """
 
         # volume of the box
-        V = float(self.grid_size ** 3)
+        V = float(self.size ** 3)
         # volume of each grid cell
-        Vx = V / self.n_grid ** 3
+        Vx = V / self.elements ** 3
 
         # get the density field in fourier space
         delta_k = jnp.fft.rfftn(delta, norm="backward")  
@@ -62,7 +65,7 @@ class PowerSpectrum(SpectralOperation):
 
         power = jnp.real(delta_k * jnp.conj(delta_k) / V)
 
-        power_ensemble = jnp.zeros(self.n_bins)
+        power_ensemble = jnp.zeros(self.bins)
         power_ensemble = power_ensemble.at[self.index_grid].add(power)
 
         power_ensemble_avg = power_ensemble / self.n_modes

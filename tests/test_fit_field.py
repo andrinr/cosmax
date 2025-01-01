@@ -9,7 +9,7 @@ def test_fit_field():
     field = jax.random.uniform(key_field, (N, N, N), minval=0.001, maxval=0.002)
     pos_lag, pos, mass = fit_field(
         key=key_opt,
-        N=N,
+        elements=N,
         field=field, 
         total_mass=jnp.sum(field),
         iterations=100,

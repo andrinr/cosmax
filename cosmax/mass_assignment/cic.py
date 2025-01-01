@@ -6,7 +6,8 @@ from functools import partial
 def cic_ma(
         pos : jax.Array, 
         weight : jax.Array, 
-        grid_size : int) -> jax.Array:
+        elements : int,
+        size : float = 1.0) -> jax.Array:
 
     """
     Periodic cloud in a cell mass (CIC) mass assignment. 
@@ -17,39 +18,37 @@ def cic_ma(
     Args:
         pos : position of the particle
         weight : weight of the particle
-        grid_size : size of the grid
+        elements : number of elements in each dimension
+        size : size of the box in real space
 
     Returns:
         The grid with the mass assigned
     
     """
     
-    dx = 1 / grid_size
-    coords = jnp.linspace(start=0, stop=1, num=grid_size+1)
+    dx = 1 / elements
+    coords = jnp.linspace(start=0, stop=size, num=elements+1)
 
-    field = jnp.zeros((grid_size, grid_size, grid_size))
+    field = jnp.zeros((elements, elements, elements))
 
     # find position on the grid
-    x = jnp.digitize(pos[0] % 1.0, coords, right=False) - 1
-    y = jnp.digitize(pos[1] % 1.0, coords, right=False) - 1
-    z = jnp.digitize(pos[2] % 1.0, coords, right=False) - 1
+    x = jnp.digitize(pos[0] % size, coords, right=False) - 1
+    y = jnp.digitize(pos[1] % size, coords, right=False) - 1
+    z = jnp.digitize(pos[2] % size, coords, right=False) - 1
 
     # find the weights
-    xw = (pos[0] % 1.0 - coords[x]) / dx
-    yw = (pos[1] % 1.0 - coords[y]) / dx
-    zw = (pos[2] % 1.0 - coords[z]) / dx
-
-    offsets = jnp.array([-1, 1])
-    oxs, oys, ozs = jnp.meshgrid(offsets, offsets, offsets)
+    xw = (pos[0] % size - coords[x]) / dx
+    yw = (pos[1] % size - coords[y]) / dx
+    zw = (pos[2] % size - coords[z]) / dx
 
     # assign the mass
     field = field.at[x, y, z].add(weight * (1 - xw) * (1 - yw) * (1 - zw))
-    field = field.at[(x + 1) % grid_size, y, z].add(weight * xw * (1 - yw) * (1 - zw))
-    field = field.at[x, (y + 1) % grid_size, z].add(weight * (1 - xw) * yw * (1 - zw))
-    field = field.at[(x + 1) % grid_size, (y + 1) % grid_size, z].add(weight * xw * yw * (1 - zw))
-    field = field.at[x, y, (z + 1) % grid_size].add(weight * (1 - xw) * (1 - yw) * zw)
-    field = field.at[(x + 1) % grid_size, y, (z + 1) % grid_size].add(weight * xw * (1 - yw) * zw)
-    field = field.at[x, (y + 1) % grid_size, (z + 1) % grid_size].add(weight * (1 - xw) * yw * zw)
-    field = field.at[(x + 1) % grid_size, (y + 1) % grid_size, (z + 1) % grid_size].add(weight * xw * yw * zw)
+    field = field.at[(x + 1) % elements, y, z].add(weight * xw * (1 - yw) * (1 - zw))
+    field = field.at[x, (y + 1) % elements, z].add(weight * (1 - xw) * yw * (1 - zw))
+    field = field.at[(x + 1) % elements, (y + 1) % elements, z].add(weight * xw * yw * (1 - zw))
+    field = field.at[x, y, (z + 1) % elements].add(weight * (1 - xw) * (1 - yw) * zw)
+    field = field.at[(x + 1) % elements, y, (z + 1) % elements].add(weight * xw * (1 - yw) * zw)
+    field = field.at[x, (y + 1) % elements, (z + 1) % elements].add(weight * (1 - xw) * yw * zw)
+    field = field.at[(x + 1) % elements, (y + 1) % elements, (z + 1) % elements].add(weight * xw * yw * zw)
 
     return field

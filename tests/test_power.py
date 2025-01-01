@@ -24,7 +24,7 @@ def test_power():
 
     N = 256
     n_bins = 48
-    power_spectrum = PowerSpectrum(n_grid=N, n_bins=n_bins)
+    power_spectrum = PowerSpectrum(elements=N, bins=n_bins)
 
     # delta = gen_data(N)
     
