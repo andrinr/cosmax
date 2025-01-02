@@ -7,12 +7,12 @@ class Potential(SpectralOperation):
     Gravitational potential from a 3D density field.
     
     Args:
-        n_grid : number of grid points in each dimension
+        elements : number of grid points in each dimension
 
     """
 
-    def __init__(self, n_grid : int):
-        super().__init__(elements=n_grid)
+    def __init__(self, elements : int):
+        super().__init__(elements=elements)
 
     def __call__(
             self, 

@@ -68,7 +68,9 @@ class SpectralLoss(SpectralOperation):
         power_a = delta_k_a
         power_b = delta_k_b
 
-        power_loss = jnp.real((power_a - power_b) * jnp.conj(power_a - power_b) / V)
+        difference = power_a - power_b
+
+        power_loss = jnp.real((difference) * jnp.conj(difference) / V)
 
         power_loss_ensemble = jnp.zeros(self.bins)
         power_loss_ensemble = power_loss_ensemble.at[self.index_grid].add(power_loss)
