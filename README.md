@@ -41,7 +41,7 @@ We can also use the power spectrum as a loss function to find a [conditional IC 
 
 When measuring the execution time of the power spectrum calculation, cosmax is faster than PowerBox even **without gpu** acceleration:
 
-<img src="https://raw.githubusercontent.com/andrinr/cosmax/refs/heads/main/data/performance.png" alt="drawing" width="300"/>
+<img src="https://raw.githubusercontent.com/andrinr/cosmax/refs/heads/main/data/benchmark.png" alt="drawing" width="300"/>
 
 This is suprising, since PowerBox is based on FFTW, a highly optimized C library for Fourier Transforms. We have excluded the warmup execution time of the JAX JIT compiler, which includes optimization and compilation of the function. For this reason, you might not see a speedup but a slowdown if powerbox is replaced with cosmax naively.
 Generally speaking, the performance gains of cosmax are felt, when the power spectrum calculations are done **repeatedly**, e.g. in optimization loops.
