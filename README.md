@@ -29,13 +29,17 @@ Cloud in a cell mass assignment scheme to [convert unstructured particles to a 3
 
 ### Optimization
 
-With gradient optimization over the cic mass assignment scheme, we can find the particle positions that best [fit an observed density field](examples/fit.ipynb):
+With gradient optimization over the cic mass assignment scheme, we can find the particle positions that best [fit an observed density field](examples/fit_field.ipynb):
 
 <img src="https://raw.githubusercontent.com/andrinr/cosmax/refs/heads/main/data/fit.png" alt="drawing" width="400"/>
 
 We can also use the power spectrum as a loss function to find a [conditional IC density field ](examples/conditional_ic.ipynb):
 
 <img src="https://raw.githubusercontent.com/andrinr/cosmax/refs/heads/main/data/cond_ic.png" alt="drawing" width="400"/>
+
+Because the IC Generator is also differentiable, we can even find the [white noise ICs](examples/conditional_ic_2.ipynb) that best fit the observed density field:
+
+<img src="https://raw.githubusercontent.com/andrinr/cosmax/refs/heads/main/data/cond_ic_2.png" alt="drawing" width="400"/>
 
 ## Benchmark
 
@@ -44,7 +48,7 @@ When measuring the execution time of the power spectrum calculation, cosmax is f
 <img src="https://raw.githubusercontent.com/andrinr/cosmax/refs/heads/main/data/benchmark.png" alt="drawing" width="300"/>
 
 This is suprising, since PowerBox is based on FFTW, a highly optimized C library for Fourier Transforms. We have excluded the warmup execution time of the JAX JIT compiler, which includes optimization and compilation of the function. For this reason, you might not see a speedup but a slowdown if powerbox is replaced with cosmax naively.
-Generally speaking, the performance gains of cosmax are felt, when the power spectrum calculations are done **repeatedly**, e.g. in optimization loops. The performance does not originate from smart performance increasing tricks used in cosmax, but rather the power of XLA and JAX. 
+Generally speaking, the performance gains of cosmax are felt, when the power spectrum calculations are done **repeatedly**, e.g. in optimization loops. The testing notebook can be found [here](examples/benchmark.ipynb).
 
 ## Limitations
 
